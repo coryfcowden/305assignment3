@@ -24,7 +24,13 @@ public class Main extends JFrame {
     public Main() {
         JTextField pathField = new JTextField();
         JButton okButton = new JButton("OK");
-        Nanny controller = new Nanny("TOKEN");
+
+        //use System.getenv token so multiple people can use their token
+        String token = System.getenv("NANNY_TOKEN");
+        if (token == null || token.isEmpty()) {
+            throw new IllegalStateException("Missing environment variable NANNY_TOKEN");
+        }
+        Nanny controller = new Nanny(token);
 
         JPanel top = new JPanel(new BorderLayout());
         top.add(new JLabel("Folder Path:"), BorderLayout.WEST);
