@@ -2,25 +2,68 @@ package org.example;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+
+import javax.imageio.ImageIO;
+
+import net.sourceforge.plantuml.FileFormat;
+import net.sourceforge.plantuml.FileFormatOption;
+import net.sourceforge.plantuml.SourceStringReader;
 
 /**
- * Simple placeholder panel with centered string.
+ * Diagram panel using PlantUML to render UML diagrams inside the Assignment 3 project.
  */
 public class DiagramPanel extends JPanel {
-    Color lightOrange = new Color(255, 219, 187);
+
+    private BufferedImage image;
 
     public DiagramPanel() {
-        setBackground(lightOrange);
+        setBackground(Color.WHITE);
+
+        String uml = "@startuml\n" +
+                "!pragma layout smetana\n" +
+                "class Foo\n" +
+                "class Bar\n" +
+                "interface Interactive\n" +
+                "abstract class Device\n" +
+                "Foo ..|> Interactive\n" +
+                "Bar --> Device\n" +
+                "Bar ..> Foo\n" +
+                "Device *-- Interactive\n" +
+                "@enduml";
+
+        loadDiagram(uml);
+    }
+
+    // convert UML text --> PNG --> BufferedImage
+    private void loadDiagram(String uml) {
+        try {
+            SourceStringReader reader = new SourceStringReader(uml);
+            ByteArrayOutputStream os = new ByteArrayOutputStream();
+            reader.outputImage(os, new FileFormatOption(FileFormat.PNG));
+            os.close();
+            image = ImageIO.read(new ByteArrayInputStream(os.toByteArray()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
-        String s = "This space is empty for now :p";
-        FontMetrics fm = g.getFontMetrics();
-        int x = (getWidth() - fm.stringWidth(s)) / 2;
-        int y = (getHeight() / 2) - (fm.getHeight() / 2) + fm.getAscent();
-        g.setColor(Color.DARK_GRAY);
-        g.drawString(s, x, y);
+        if (image != null) {
+            g.drawImage(image, 0, 0, this);
+        }
+    }
+
+    @Override
+    public Dimension getPreferredSize() {
+        if (image != null) {
+            return new Dimension(image.getWidth(), image.getHeight());
+        }
+        return super.getPreferredSize();
     }
 }
