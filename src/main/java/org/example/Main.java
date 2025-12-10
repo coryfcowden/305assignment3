@@ -53,7 +53,8 @@ public class Main extends JFrame {
         add(tabs, BorderLayout.CENTER);
         add(statusBar, BorderLayout.SOUTH);
 
-        okButton.addActionListener(new Listener(pathField, controller, gridPanel, filePanel, statusBar, metricsPanel));
+        // pass diagramPanel into Listener so it can update UML at runtime
+        okButton.addActionListener(new Listener(pathField, controller, gridPanel, filePanel, statusBar, metricsPanel, diagramPanel));
 
         Blackboard.getInstance();
     }

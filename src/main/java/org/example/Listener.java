@@ -4,24 +4,13 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Handles the action for the top "OK" button.
  *
- * This controller:
- * - Reads the GitHub folder URL
- * - Uses the Nanny to fetch and download Java files
- * - Analyzes each file with FileAnalyzer
- * - Registers classes with the MetricsCalculator
- * - Computes metrics
- * - Updates the Blackboard and refreshes all UI components
- *
- * The heavy work is done in a background thread to keep the UI responsive.
- * @CAuthor Cory Cowden
+ * Now also generates PlantUML from fetched classes and sends it to DiagramPanel.
  */
-
 public class Listener implements ActionListener {
     private final JTextField pathField;
     private final Nanny nanny;
@@ -29,14 +18,16 @@ public class Listener implements ActionListener {
     private final FilePanel filePanel;
     private final StatusBar statusBar;
     private final MetricsPanel metricsPanel;
+    private final DiagramPanel diagramPanel;
 
-    public Listener(JTextField pathField, Nanny nanny, GridPanel gridPanel, FilePanel filePanel, StatusBar statusBar, MetricsPanel metricsPanel) {
+    public Listener(JTextField pathField, Nanny nanny, GridPanel gridPanel, FilePanel filePanel, StatusBar statusBar, MetricsPanel metricsPanel, DiagramPanel diagramPanel) {
         this.pathField = pathField;
         this.nanny = nanny;
         this.gridPanel = gridPanel;
         this.filePanel = filePanel;
         this.statusBar = statusBar;
         this.metricsPanel = metricsPanel;
+        this.diagramPanel = diagramPanel;
     }
 
     @Override
@@ -61,10 +52,14 @@ public class Listener implements ActionListener {
                 List<FileData> fileDataList = new ArrayList<>();
                 int maxLines = 1;
 
+                // collect className -> content for UML generator
+                Map<String, String> classSources = new LinkedHashMap<>();
+
                 for (Nanny.FileEntry entry : entries) {
                     if (!entry.path.endsWith(".java")) continue;
                     try {
                         String content = nanny.getFileContentFromDownloadUrl(entry.downloadUrl);
+
                         FileData data = FileAnalyzer.analyze(entry.path, content);
                         fileDataList.add(data);
                         if (data.getLines() > maxLines) maxLines = data.getLines();
@@ -72,6 +67,9 @@ public class Listener implements ActionListener {
                         // register class using simple name (strip path & .java)
                         String simpleName = extractSimpleName(entry.path);
                         MetricsCalculator.getInstance().registerClass(simpleName, content);
+
+                        // store for UML generator: key = simpleName, value = content
+                        classSources.put(simpleName, content);
 
                     } catch (IOException ex) {
                         System.out.println("Error reading " + entry.path + " : " + ex.getMessage());
@@ -84,12 +82,18 @@ public class Listener implements ActionListener {
                 // compute metrics
                 MetricsCalculator.getInstance().computeMetrics();
 
+                // generate UML text
+                String uml = UMLGenerator.generatePlantUML(classSources);
+
                 // update UI on EDT
                 SwingUtilities.invokeLater(() -> {
                     gridPanel.refresh();
                     filePanel.refresh();
                     statusBar.refresh();
                     metricsPanel.repaint();
+
+                    // send UML to diagram panel
+                    diagramPanel.setUml(uml);
                 });
 
             } catch (IOException ex) {
