@@ -1,51 +1,64 @@
 package org.example;
 
 import java.util.*;
-import java.util.regex.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+/**
+ * Figures out whether each source file declares a normal class,
+ * an interface, or an abstract class.
+ *
+ * Uses simple regex checks — not a full Java parser.
+ */
 public class TypeDetector {
 
+    // Match "class Foo" or "interface Bar"
     private static final Pattern CLASS_PATTERN =
             Pattern.compile("\\b(class|interface)\\s+([A-Z][A-Za-z0-9_]*)");
 
+    // Match "abstract class Foo"
     private static final Pattern ABSTRACT_PATTERN =
             Pattern.compile("\\babstract\\s+class\\s+([A-Z][A-Za-z0-9_]*)");
 
     /**
-     * Detects class type: class, interface, or abstract class.
+     * Returns a map: className → "class", "interface", or "abstract class".
      */
-    public Map<String, String> detectTypes(Map<String, String> cleaned) {
+    public Map<String, String> detectTypes(Map<String, String> cleanedSources) {
 
-        Map<String, String> result = new LinkedHashMap<>();
+        Map<String, String> types = new LinkedHashMap<>();
 
-        for (String cls : cleaned.keySet()) {
-            String content = cleaned.get(cls);
+        for (String className : cleanedSources.keySet()) {
 
-            // Abstract?
-            Matcher ma = ABSTRACT_PATTERN.matcher(content);
-            if (ma.find() && ma.group(1).equals(cls)) {
-                result.put(cls, "abstract class");
+            String code = cleanedSources.get(className);
+
+            // Check for abstract class first
+            Matcher abstractMatch = ABSTRACT_PATTERN.matcher(code);
+            if (abstractMatch.find() && abstractMatch.group(1).equals(className)) {
+                types.put(className, "abstract class");
                 continue;
             }
 
-            // Class or interface?
-            Matcher mc = CLASS_PATTERN.matcher(content);
-            boolean found = false;
+            // Otherwise check for class or interface
+            Matcher classMatch = CLASS_PATTERN.matcher(code);
+            boolean matched = false;
 
-            while (mc.find()) {
-                String type = mc.group(1);
-                String name = mc.group(2);
+            while (classMatch.find()) {
+                String kind = classMatch.group(1);   // class / interface
+                String foundName = classMatch.group(2);
 
-                if (name.equals(cls)) {
-                    result.put(cls, type);
-                    found = true;
+                if (foundName.equals(className)) {
+                    types.put(className, kind);     // store "class" or "interface"
+                    matched = true;
                     break;
                 }
             }
 
-            if (!found) result.put(cls, "class");
+            // Default fallback
+            if (!matched) {
+                types.put(className, "class");
+            }
         }
 
-        return result;
+        return types;
     }
 }

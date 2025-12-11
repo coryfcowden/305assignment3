@@ -3,53 +3,74 @@ package org.example;
 import java.util.*;
 import java.util.regex.*;
 
+/**
+ * Counts simple incoming and outgoing dependencies between classes
+ * based on name references inside class content.
+ *
+ * This version keeps the same logic but is written in a simpler,
+ * more student‑like style.
+ */
 public class DependencyCounter {
 
+    /**
+     * Count how many times each class is referenced BY other classes.
+     * incoming[B]++ means A → B
+     */
     public Map<String, Integer> computeIncoming(Map<String, String> classes) {
         Map<String, Integer> incoming = new HashMap<>();
-        Map<String, Integer> outgoing = computeOutgoing(classes);
 
+        // initialize all counts
         for (String cls : classes.keySet()) {
             incoming.put(cls, 0);
         }
 
-        for (String classA : classes.keySet()) {
-            String contentA = classes.get(classA);
-            for (String classB : classes.keySet()) {
-                if (classA.equals(classB)) continue;
+        // look at every class and see which names it mentions
+        for (String from : classes.keySet()) {
+            String content = classes.get(from);
 
-                Pattern p = Pattern.compile("\\b" + Pattern.quote(classB) + "\\b");
-                Matcher m = p.matcher(contentA);
+            for (String to : classes.keySet()) {
+                if (from.equals(to)) continue;
 
-                if (m.find()) {
-                    incoming.put(classB, incoming.get(classB) + 1);
+                Pattern pattern = Pattern.compile("\\b" + Pattern.quote(to) + "\\b");
+                Matcher matcher = pattern.matcher(content);
+
+                if (matcher.find()) {
+                    incoming.put(to, incoming.get(to) + 1);
                 }
             }
         }
+
         return incoming;
     }
 
+    /**
+     * Count how many classes each class references.
+     * outgoing[A]++ means A → B
+     */
     public Map<String, Integer> computeOutgoing(Map<String, String> classes) {
         Map<String, Integer> outgoing = new HashMap<>();
 
+        // initialize all counts
         for (String cls : classes.keySet()) {
             outgoing.put(cls, 0);
         }
 
-        for (String classA : classes.keySet()) {
-            String contentA = classes.get(classA);
+        // check if a class mentions another class name
+        for (String from : classes.keySet()) {
+            String content = classes.get(from);
 
-            for (String classB : classes.keySet()) {
-                if (classA.equals(classB)) continue;
+            for (String to : classes.keySet()) {
+                if (from.equals(to)) continue;
 
-                Pattern p = Pattern.compile("\\b" + Pattern.quote(classB) + "\\b");
-                Matcher m = p.matcher(contentA);
+                Pattern pattern = Pattern.compile("\\b" + Pattern.quote(to) + "\\b");
+                Matcher matcher = pattern.matcher(content);
 
-                if (m.find()) {
-                    outgoing.put(classA, outgoing.get(classA) + 1);
+                if (matcher.find()) {
+                    outgoing.put(from, outgoing.get(from) + 1);
                 }
             }
         }
+
         return outgoing;
     }
 }

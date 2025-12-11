@@ -2,6 +2,13 @@ package org.example;
 
 import java.util.*;
 
+/**
+ * High‑level coordinator for UML generation.
+ *
+ * Takes a map of simple class names → source code,
+ * cleans the text, detects class types and relationships,
+ * and finally asks PlantUMLBuilder to create the diagram text.
+ */
 public class UMLGenerator {
 
     private static final TypeDetector typeDetector = new TypeDetector();
@@ -9,30 +16,36 @@ public class UMLGenerator {
     private static final PlantUMLBuilder plantUmlBuilder = new PlantUMLBuilder();
 
     /**
-     *  Main entry point used by Listener → DiagramPanel.
-     * Accepts a map: simpleClassName → sourceCode
+     * Called by Listener → DiagramPanel.
+     * Returns a full PlantUML diagram as plain text.
      */
     public static String generatePlantUML(Map<String, String> classSources) {
 
-        if (classSources == null) classSources = Collections.emptyMap();
+        if (classSources == null) {
+            classSources = Collections.emptyMap();
+        }
 
-        // Clean + normalize names
+        // Clean up code (strip comments, standardize names)
         Map<String, String> cleaned = new LinkedHashMap<>();
+
         for (var entry : classSources.entrySet()) {
-            String simple = TypeUtils.extractSimpleName(entry.getKey());
-            String code = entry.getValue() == null ? "" : TypeUtils.stripComments(entry.getValue());
-            cleaned.put(simple, code);
+            String name = TypeUtils.extractSimpleName(entry.getKey());
+            String code = entry.getValue() == null
+                    ? ""
+                    : TypeUtils.stripComments(entry.getValue());
+
+            cleaned.put(name, code);
         }
 
         Set<String> classNames = cleaned.keySet();
 
-        // Determine types (class / interface / abstract)
-        Map<String, String> typeDeclarations = typeDetector.detectTypes(cleaned);
+        // Step 1: detect whether each file defines a class, abstract class, or interface
+        Map<String, String> typeMap = typeDetector.detectTypes(cleaned);
 
-        // Detect UML relationships
+        // Step 2: analyze fields, inheritance, params, local variables, etc.
         List<Relation> relations = relationshipDetector.detectRelations(cleaned, classNames);
 
-        // Build final PlantUML diagram
-        return plantUmlBuilder.build(typeDeclarations, relations);
+        // Step 3: send everything to the PlantUML builder
+        return plantUmlBuilder.build(typeMap, relations);
     }
 }

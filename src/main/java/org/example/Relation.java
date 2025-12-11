@@ -3,17 +3,15 @@ package org.example;
 import java.util.*;
 
 /**
- * Represents a UML relationship between two classes, and provides helpers
- * to manage precedence rules between relationship types.
- *
- * This combines both the Relation model and the utilities for manipulating
- * relationship maps (formerly RelationUtils).
+ * Simple class representing a UML relationship between two classes.
+ * Also includes small helper logic for choosing the strongest relationship type
+ * when multiple types appear between the same pair of classes.
  */
 public class Relation {
 
-    public final String from;     // source class
-    public final String to;       // target class
-    public final RelType type;    // relationship type
+    public final String from;   // source side of relationship
+    public final String to;     // target side
+    public final RelType type;  // relationship kind
 
     public Relation(String from, String to, RelType type) {
         this.from = from;
@@ -22,7 +20,7 @@ public class Relation {
     }
 
     /**
-     * Enum of all UML relationship types supported.
+     * Types of relationships we care about in our simplified UML generator.
      */
     public enum RelType {
         EXTENDS,
@@ -34,8 +32,8 @@ public class Relation {
     }
 
     /**
-     * Precedence list: lower index = stronger relationship.
-     * EXTENDS is strongest; DEPENDENCY is weakest.
+     * Order of strength. Earlier means “stronger.”
+     * (Example: composition should override association.)
      */
     private static final List<RelType> PRECEDENCE = List.of(
             RelType.EXTENDS,
@@ -47,26 +45,27 @@ public class Relation {
     );
 
     /**
-     * Adds a relationship to the map, replacing weaker ones with stronger ones.
-     *
-     *  Example key: "Car|Engine"
+     * Adds or updates a relationship in the map. If one already exists,
+     * we only replace it when the new relationship is considered stronger.
      */
     public static void addRelation(Map<String, RelType> map,
-                                   String from, String to, RelType newType) {
+                                   String from,
+                                   String to,
+                                   RelType newType) {
 
         String key = from + "|" + to;
-        RelType existing = map.get(key);
+        RelType old = map.get(key);
 
-        if (existing == null) {
+        if (old == null) {
             map.put(key, newType);
             return;
         }
 
-        // Replace if newType is stronger (lower index)
-        int existingIndex = PRECEDENCE.indexOf(existing);
-        int newIndex = PRECEDENCE.indexOf(newType);
+        // Compare strength using the list order.
+        int oldRank = PRECEDENCE.indexOf(old);
+        int newRank = PRECEDENCE.indexOf(newType);
 
-        if (newIndex < existingIndex) {
+        if (newRank < oldRank) {
             map.put(key, newType);
         }
     }

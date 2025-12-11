@@ -3,80 +3,84 @@ package org.example;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-
+import java.io.*;
 import javax.imageio.ImageIO;
 
-import net.sourceforge.plantuml.FileFormat;
-import net.sourceforge.plantuml.FileFormatOption;
-import net.sourceforge.plantuml.SourceStringReader;
+import net.sourceforge.plantuml.*;
 
-/**
- * Diagram panel using PlantUML to render UML diagrams inside the project.
- *
- * Now supports dynamic UML text updates via setUml(String).
- */
 public class DiagramPanel extends JPanel {
 
-    private BufferedImage image;
-    private String lastUml;
+private BufferedImage image;
+private String lastUml;
 
-    public DiagramPanel() {
-        setBackground(Color.WHITE);
-        lastUml = null;
-    }
+public DiagramPanel() {
+setBackground(Color.WHITE);
+lastUml = null;
+}
 
-    /**
-     * Set PlantUML source text. This will render it and repaint the panel.
-     */
-    public void setUml(String uml) {
-        if (uml == null) return;
-        // avoid re-rendering same UML repeatedly
-        if (uml.equals(lastUml)) return;
-        lastUml = uml;
-        loadDiagram(uml);
-        revalidate();
-        repaint();
-    }
+/**
+ * Updates the panel with new UML text.
+ * If UML hasn't changed, nothing is redrawn.
+ */
+        public void setUml(String uml) {
+if (uml == null) return;
 
-    // convert UML text --> PNG --> BufferedImage
-    private void loadDiagram(String uml) {
-        try {
-            SourceStringReader reader = new SourceStringReader(uml);
-            ByteArrayOutputStream os = new ByteArrayOutputStream();
-            reader.outputImage(os, new FileFormatOption(FileFormat.PNG));
-            os.close();
-            image = ImageIO.read(new ByteArrayInputStream(os.toByteArray()));
-        } catch (IOException e) {
-            e.printStackTrace();
-            image = null;
-        }
-    }
+// avoid unnecessary re-renders
+if (uml.equals(lastUml)) return;
 
-    @Override
-    protected void paintComponent(Graphics g) {
-        super.paintComponent(g);
-        if (image != null) {
-            // draw at top-left; you could center or scale if desired
-            g.drawImage(image, 0, 0, this);
-        } else {
-            // placeholder text
-            String s = "UML diagram will appear here after loading a repository";
-            FontMetrics fm = g.getFontMetrics();
-            int x = (getWidth() - fm.stringWidth(s)) / 2;
-            int y = (getHeight() / 2) - (fm.getHeight() / 2) + fm.getAscent();
-            g.setColor(Color.DARK_GRAY);
-            g.drawString(s, x, y);
-        }
-    }
+lastUml = uml;
+loadDiagram(uml);
+revalidate();
+repaint();
+}
 
-    @Override
-    public Dimension getPreferredSize() {
-        if (image != null) {
-            return new Dimension(image.getWidth(), image.getHeight());
-        }
-        return super.getPreferredSize();
-    }
+/**
+ * Turns a UML text string into a PNG image using PlantUML.
+ */
+        private void loadDiagram(String uml) {
+try {
+SourceStringReader reader = new SourceStringReader(uml);
+ByteArrayOutputStream out = new ByteArrayOutputStream();
+
+// PlantUML renders directly into the stream
+reader.outputImage(out, new FileFormatOption(FileFormat.PNG));
+out.close();
+
+byte[] data = out.toByteArray();
+image = ImageIO.read(new ByteArrayInputStream(data));
+
+} catch (IOException e) {
+e.printStackTrace();
+image = null;
+}
+}
+
+@Override
+protected void paintComponent(Graphics g) {
+super.paintComponent(g);
+
+if (image != null) {
+// Draw at (0,0); not centered or scaled
+g.drawImage(image, 0, 0, this);
+return;
+}
+
+// Fallback text when no UML is loaded yet
+String msg = "UML diagram will appear here after loading a repository";
+FontMetrics fm = g.getFontMetrics();
+
+int x = (getWidth() - fm.stringWidth(msg)) / 2;
+int y = (getHeight() / 2) + fm.getAscent() / 2;
+
+g.setColor(Color.DARK_GRAY);
+g.drawString(msg, x, y);
+}
+
+@Override
+public Dimension getPreferredSize() {
+if (image != null) {
+return new Dimension(image.getWidth(), image.getHeight());
+}
+return super.getPreferredSize();
+}
 }
