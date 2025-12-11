@@ -1,0 +1,48 @@
+{"severity":"INFO","logger":"org.example.Main","thread":"main","message":"Starting Assignment 3 application","stack_trace":""}
+{"severity":"INFO","logger":"org.example.Main","thread":"main","message":"Creating main application window","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Main","thread":"main","message":"Initialized Nanny controller","stack_trace":""}
+{"severity":"INFO","logger":"org.example.Main","thread":"main","message":"Main window created","stack_trace":""}
+{"severity":"INFO","logger":"org.example.Listener","thread":"AWT-EventQueue-0","message":"OK button clicked with URL: 'https://github.com/CSC3100/Tool-PlantUML/tree/main'","stack_trace":""}
+{"severity":"INFO","logger":"org.example.Listener","thread":"AWT-EventQueue-0","message":"Starting background fetch for URL: https://github.com/CSC3100/Tool-PlantUML/tree/main","stack_trace":""}
+{"severity":"INFO","logger":"org.example.Listener","thread":"Thread-0","message":"Fetched 2 entries from GitHub.","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"Thread-0","message":"MetricsCalculator cleared.","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"Thread-0","message":"Processed Java file: src/main/java/DiagramPanel.java","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"Thread-0","message":"Processed Java file: src/main/java/Driver.java","stack_trace":""}
+{"severity":"INFO","logger":"org.example.Listener","thread":"Thread-0","message":"Analysis complete. 2 Java files analyzed.","stack_trace":""}
+{"severity":"INFO","logger":"org.example.Listener","thread":"Thread-0","message":"Metrics computation finished.","stack_trace":""}
+{"severity":"INFO","logger":"org.example.Listener","thread":"Thread-0","message":"UML generation finished.","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"AWT-EventQueue-0","message":"GUI components refreshed after analysis.","stack_trace":""}
+{"severity":"INFO","logger":"org.example.Listener","thread":"AWT-EventQueue-0","message":"OK button clicked with URL: 'https://github.com/coryfcowden/305assignment3/tree/main'","stack_trace":""}
+{"severity":"INFO","logger":"org.example.Listener","thread":"AWT-EventQueue-0","message":"Starting background fetch for URL: https://github.com/coryfcowden/305assignment3/tree/main","stack_trace":""}
+{"severity":"INFO","logger":"org.example.Listener","thread":"Thread-1","message":"Fetched 26 entries from GitHub.","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"Thread-1","message":"MetricsCalculator cleared.","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"Thread-1","message":"Processed Java file: src/main/java/org/example/AbstractnessCalculator.java","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"Thread-1","message":"Processed Java file: src/main/java/org/example/Blackboard.java","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"Thread-1","message":"Processed Java file: src/main/java/org/example/DependencyCounter.java","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"Thread-1","message":"Processed Java file: src/main/java/org/example/DependencyDetector.java","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"Thread-1","message":"Processed Java file: src/main/java/org/example/DiagramPanel.java","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"Thread-1","message":"Processed Java file: src/main/java/org/example/FieldRelationshipDetector.java","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"Thread-1","message":"Processed Java file: src/main/java/org/example/FileAnalyzer.java","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"Thread-1","message":"Processed Java file: src/main/java/org/example/FileData.java","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"Thread-1","message":"Processed Java file: src/main/java/org/example/FilePanel.java","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"Thread-1","message":"Processed Java file: src/main/java/org/example/GridPanel.java","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"Thread-1","message":"Processed Java file: src/main/java/org/example/InheritanceDetector.java","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"Thread-1","message":"Processed Java file: src/main/java/org/example/InstabilityCalculator.java","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"Thread-1","message":"Processed Java file: src/main/java/org/example/Listener.java","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"Thread-1","message":"Processed Java file: src/main/java/org/example/Main.java","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"Thread-1","message":"Processed Java file: src/main/java/org/example/Metric.java","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"Thread-1","message":"Processed Java file: src/main/java/org/example/MetricRegistry.java","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"Thread-1","message":"Processed Java file: src/main/java/org/example/MetricsCalculator.java","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"Thread-1","message":"Processed Java file: src/main/java/org/example/MetricsPanel.java","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"Thread-1","message":"Processed Java file: src/main/java/org/example/Nanny.java","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"Thread-1","message":"Processed Java file: src/main/java/org/example/PlantUMLBuilder.java","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"Thread-1","message":"Processed Java file: src/main/java/org/example/Relation.java","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"Thread-1","message":"Processed Java file: src/main/java/org/example/RelationshipDetector.java","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"Thread-1","message":"Processed Java file: src/main/java/org/example/StatusBar.java","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"Thread-1","message":"Processed Java file: src/main/java/org/example/TypeDetector.java","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"Thread-1","message":"Processed Java file: src/main/java/org/example/TypeUtils.java","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"Thread-1","message":"Processed Java file: src/main/java/org/example/UMLGenerator.java","stack_trace":""}
+{"severity":"INFO","logger":"org.example.Listener","thread":"Thread-1","message":"Analysis complete. 26 Java files analyzed.","stack_trace":""}
+{"severity":"INFO","logger":"org.example.Listener","thread":"Thread-1","message":"Metrics computation finished.","stack_trace":""}
+{"severity":"INFO","logger":"org.example.Listener","thread":"Thread-1","message":"UML generation finished.","stack_trace":""}
+{"severity":"DEBUG","logger":"org.example.Listener","thread":"AWT-EventQueue-0","message":"GUI components refreshed after analysis.","stack_trace":""}
