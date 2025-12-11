@@ -6,17 +6,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
-/**
- * Visual grid that represents each analyzed file as a colored square.
- *
- * The color encodes file complexity (green → low, yellow → medium, red → high),
- * and the transparency encodes size (more lines → more opaque).
- *
- * Clicking a square updates the selected file in the Blackboard and reflects
- * the name in the panel's label. This view gives a quick overview of size and
- * complexity across the whole repository.
- * @Author Cory Cowden
- */
 
 public class GridPanel extends JPanel {
     private final JPanel grid;

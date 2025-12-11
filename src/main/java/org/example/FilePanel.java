@@ -6,15 +6,6 @@ import javax.swing.tree.DefaultTreeModel;
 import java.awt.*;
 import java.util.List;
 
-/**
- * Displays a navigable tree of Java files on the left side of the UI.
- *
- * The panel uses a JTree to show the names of all analyzed files.
- * Selecting a file updates the Blackboard so other components (GridPanel,
- * MetricsPanel, StatusBar, etc.) know which file is currently highlighted.
- * @Author Cory Cowden
- */
-
 public class FilePanel extends JPanel {
     private final JTree tree;
     private final DefaultTreeModel model;

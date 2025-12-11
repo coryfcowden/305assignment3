@@ -1,0 +1,88 @@
+<!--<configuration>-->
+<!--    <import class = "ch.qos.logback.classic.endcoder.PatternLayoutEncoder"/>-->
+<!--    <import class = "ch.qos.logback.core.ConsoleAppender"/>-->
+
+<!--    <appender name = "CONSOLE_JSON" class = "ConsoleAppender">-->
+<!--        <encoder class = "net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">-->
+<!--                <providers>-->
+<!--                    <timestamp/>-->
+<!--                    <loggerName/>-->
+<!--                    <logLevel/>-->
+<!--                    <message/>-->
+<!--                </providers>-->
+<!--        <encoder/>-->
+<!--    </appender>-->
+
+<!--    <root level = "ALL">-->
+<!--        <appender-ref ref="CONSOLE_JSON"/>-->
+<!--    </root>-->
+<!--</configuration>-->
+
+<configuration>
+    <import class="ch.qos.logback.classic.encoder.PatternLayoutEncoder"/>
+    <import class="ch.qos.logback.core.ConsoleAppender"/>
+    <import class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder"/>
+
+    <appender name="CONSOLE_JSON" class="ConsoleAppender">
+        <encoder class="LoggingEventCompositeJsonEncoder">
+            <providers>
+                <pattern>
+                    <pattern>
+                        {
+                        "severity": "%level",
+                        "logger": "%logger",
+                        "thread": "%thread",
+                        "message": "%message",
+                        "stack_trace": "%ex{full}"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+    </appender>
+
+    <appender name="CONSOLE_TXT" class="ConsoleAppender">
+        <encoder class="PatternLayoutEncoder">
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE" class="ch.qos.logback.core.FileAppender">
+        <file>logs/Logback.log</file>
+        <encoder class="LoggingEventCompositeJsonEncoder">
+            <providers>
+                <pattern>
+                    <pattern>
+                        {
+                        "severity": "%level",
+                        "logger": "%logger",
+                        "thread": "%thread",
+                        "message": "%message",
+                        "stack_trace": "%ex{full}"
+                        }
+                    </pattern>
+                </pattern>
+            </providers>
+        </encoder>
+    </appender>
+
+    <appender name="HTTP_EXAMPLE" class="javiergs.HttpAppender">
+        <url>https://in.logs.betterstack.com</url>
+        <bearerToken>PUT A TOKEN HERE</bearerToken>
+    </appender>
+
+    <appender name="LOGTAIL" class="com.logtail.logback.LogtailAppender">
+        <appName>ADAS</appName>
+        <sourceToken>PUT A TOKEN HERE</sourceToken>
+        <mdcFields>requestId,requestTime</mdcFields>
+        <mdcTypes>string,int</mdcTypes>
+    </appender>
+
+    <root level="ALL">
+        <appender-ref ref="CONSOLE_TXT"/>
+        <appender-ref ref="CONSOLE_JSON"/>
+        <appender-ref ref="FILE"/>
+
+    </root>
+
+</configuration>

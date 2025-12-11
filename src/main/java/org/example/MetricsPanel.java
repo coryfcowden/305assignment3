@@ -4,19 +4,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Map;
 
-/**
- * Draws the Abstractness–Instability graph for all analyzed classes.
- *
- * Each class is plotted as a point:
- * - X-axis = Instability
- * - Y-axis = Abstractness
- *
- * The panel also draws the "main sequence" diagonal and labels each plotted
- * class with a simplified name. This gives a visual overview of design
- * balance and potential problem areas in the codebase.
- * @Cory Cowden
- */
-
 public class MetricsPanel extends JPanel {
 
     Color lightPink = new Color(255, 213, 229);

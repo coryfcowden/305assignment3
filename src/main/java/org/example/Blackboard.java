@@ -13,7 +13,7 @@ import java.util.*;
  *
  * All panels read from or write to this class, acting as a simple global
  * communication hub for the application.
- * @Author Cory Cowden
+ * @Author Cory Cowden, Xio Alcala
  */
 
 public class Blackboard {

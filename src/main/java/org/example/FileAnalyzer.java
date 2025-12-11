@@ -1,17 +1,5 @@
 package org.example;
 
-/**
- * Performs basic analysis on a Java source file.
- *
- * This analyzer counts:
- * - Non-empty lines of code
- * - A simple branching complexity score based on occurrences of if/for/while/switch
- *
- * The result is returned as a FileData object, which is later displayed
- * in the grid and file tree panels.
- * @Author Cory Cowden
- */
-
 public class FileAnalyzer {
     public static FileData analyze(String fileName, String content) {
         if (content == null || content.isEmpty()) {

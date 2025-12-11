@@ -1,14 +1,5 @@
 package org.example;
 
-/**
- * Holds the Abstractness and Instability values for a single class.
- *
- * These metrics are later plotted in the MetricsPanel. A convenience method
- * computes the class's distance from the "main sequence" line (A + I = 1),
- * used for quick quality assessment.
- * @Author Cory Cowden
- */
-
 public class Metric {
     private final String className;
     private final double abstractness;

@@ -3,22 +3,6 @@ package org.example;
 import javax.swing.*;
 import java.awt.*;
 
-/**
- * Main application window for Assignment 3.
- *
- * This class sets up the entire Swing user interface, including:
- * - The URL input bar and OK button
- * - The file list panel
- * - The grid, metrics, and diagram tabs
- * - The status bar at the bottom
- *
- * It also initializes the Nanny controller, connects the GUI panels together,
- * and launches the application frame. This is the central entry point that
- * arranges all visual components and wires necessary listeners.
- *
- * @Author Cory Cowden
- */
-
 public class Main extends JFrame {
 
     public Main() {
@@ -53,7 +37,6 @@ public class Main extends JFrame {
         add(tabs, BorderLayout.CENTER);
         add(statusBar, BorderLayout.SOUTH);
 
-        // pass diagramPanel into Listener so it can update UML at runtime
         okButton.addActionListener(new Listener(pathField, controller, gridPanel, filePanel, statusBar, metricsPanel, diagramPanel));
 
         Blackboard.getInstance();
