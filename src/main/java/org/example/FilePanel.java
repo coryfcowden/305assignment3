@@ -6,6 +6,15 @@ import javax.swing.tree.DefaultTreeModel;
 import java.awt.*;
 import java.util.List;
 
+/**
+ * Swing panel that displays all analyzed files in a JTree.
+ * Updates file selection in the Blackboard when a node is clicked
+ * and refreshes the tree dynamically when new files are loaded.
+ *
+ * @author Cory Cowden
+ * @author Xiomara Alcala
+ */
+
 public class FilePanel extends JPanel {
     private final JTree tree;
     private final DefaultTreeModel model;

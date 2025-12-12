@@ -3,6 +3,15 @@ package org.example;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Utility methods for handling Java type names, including comment
+ * stripping, extracting simple names, and resolving primary types from
+ * generics or arrays.
+ *
+ * @author Cory Cowden
+ * @author Xiomara Alcala
+ */
+
 public class TypeUtils {
     public static String stripComments(String src) {
         if (src == null) return "";

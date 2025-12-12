@@ -9,6 +9,14 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * Handles the main UI action for analyzing a GitHub folder URL.
+ * Fetches Java files, computes metrics, updates the Blackboard,
+ * refreshes all UI panels, and logs progress using SLF4J.
+ *
+ * @author Cory Cowden
+ * @author Xiomara Alcala
+ */
 
 public class Listener implements ActionListener {
 

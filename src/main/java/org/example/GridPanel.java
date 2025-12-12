@@ -6,6 +6,14 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 
+/**
+ * Visual grid representation of analyzed files. Each file is shown
+ * as a colored square whose opacity reflects line count and whose color
+ * reflects complexity. Clicking a square updates the selected file.
+ *
+ * @author Cory Cowden
+ * @author Xiomara Alcala
+ */
 
 public class GridPanel extends JPanel {
     private final JPanel grid;

@@ -2,6 +2,16 @@ package org.example;
 
 import java.util.*;
 
+/**
+ * Coordinates all detectors (inheritance, field-based, and dependency)
+ * to derive the strongest relationship between classes. Produces a
+ * list of Relation objects for UML generation.
+ *
+ * @author Cory Cowden
+ * @author Xiomara Alcala
+ */
+
+
 public class RelationshipDetector {
 
     private final InheritanceDetector inheritanceDetector = new InheritanceDetector();

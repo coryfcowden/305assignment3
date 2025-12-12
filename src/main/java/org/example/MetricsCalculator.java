@@ -3,6 +3,16 @@ package org.example;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * Orchestrates computation of all code metrics, including:
+ * - Abstractness
+ * - Instability
+ * - Dependency counts (incoming/outgoing)
+ *
+ * @author Cory Cowden
+ * @author Xiomara Alcala
+ */
+
 public class MetricsCalculator {
 
     private static MetricsCalculator instance;

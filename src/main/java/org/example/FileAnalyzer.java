@@ -1,5 +1,14 @@
 package org.example;
 
+/**
+ * Performs simple static analysis on a file's raw content.
+ * Counts non-empty lines and estimates control-flow complexity
+ * by scanning for branching and loop keywords.
+ *
+ * @author Xiomara Alcala
+ * @author Cory Cowden
+ */
+
 public class FileAnalyzer {
     public static FileData analyze(String fileName, String content) {
         if (content == null || content.isEmpty()) {

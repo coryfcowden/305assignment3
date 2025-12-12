@@ -2,6 +2,15 @@ package org.example;
 
 import java.util.Map;
 
+/**
+ * Computes Instability metric (I = Ce / (Ca + Ce)),
+ * using incoming and outgoing dependency counts for a given class.
+ *
+ * @author Cory Cowden
+ * @author Xiomara Alcala
+ */
+
+
 public class InstabilityCalculator {
 
     public double compute(String className,

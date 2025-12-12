@@ -4,16 +4,11 @@ import java.util.*;
 
 /**
  * Central shared data model (Singleton) used by all GUI components.
+ * Stores loaded file data, the selected file, current status, and metrics.
+ * Acts as the global communication hub between UI panels.
  *
- * The Blackboard stores:
- * - The list of analyzed files
- * - The currently selected file name
- * - The status message for the status bar
- * - The computed metrics for each class
- *
- * All panels read from or write to this class, acting as a simple global
- * communication hub for the application.
- * @Author Cory Cowden, Xio Alcala
+ * @author Cory Cowden
+ * @author Xiomara Alcala
  */
 
 public class Blackboard {

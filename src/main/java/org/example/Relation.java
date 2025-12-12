@@ -2,6 +2,16 @@ package org.example;
 
 import java.util.*;
 
+/**
+ * Represents a relationship between two classes, including the
+ * direction and specific relationship type (extends, realizes,
+ * composition, aggregation, association, dependency).
+ *
+ * @author Cory Cowden
+ * @author Xiomara Alcala
+ */
+
+
 public class Relation {
 
     public final String from;   // source side of relationship

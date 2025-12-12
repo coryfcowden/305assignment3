@@ -4,6 +4,14 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+/**
+ * Detects class, interface, and abstract class declarations inside
+ * cleaned Java source code. Returns a map of className → type keyword.
+ *
+ * @author Cory Cowden
+ * @author Xiomara Alcala
+ */
+
 public class TypeDetector {
 
     private static final Pattern CLASS_PATTERN =

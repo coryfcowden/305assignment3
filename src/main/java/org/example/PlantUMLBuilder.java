@@ -3,6 +3,15 @@ package org.example;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Builds a complete PlantUML diagram string from detected type
+ * declarations and relationships. Maps relation types to appropriate
+ * UML arrow symbols and produces a valid @startuml block.
+ *
+ * @author Cory Cowden
+ * @author Xiomara Alcala
+ */
+
 public class PlantUMLBuilder {
     public String build(Map<String, String> typeDecls, List<Relation> relations) {
 

@@ -4,6 +4,15 @@ import java.util.*;
 import java.util.regex.*;
 
 
+/**
+ * Detects field-based relationships between classes, including composition,
+ * aggregation, and association. Scans cleaned class source for field
+ * declarations and class-type references, classifying the relation based
+ * on visibility and collection usage.
+ *  @author Cory Cowden
+ *  @author Xiomara Alcala
+ */
+
 public class FieldRelationshipDetector {
 
     private static final Pattern FIELD =

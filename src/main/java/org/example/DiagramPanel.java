@@ -8,6 +8,14 @@ import javax.imageio.ImageIO;
 
 import net.sourceforge.plantuml.*;
 
+/**
+ * Swing panel that generates and displays UML diagrams using PlantUML.
+ * Converts UML source strings into PNG images and renders them in the UI.
+ *
+ * @author Cory Cowden
+ * @author Xiomara Alcala
+ */
+
 public class DiagramPanel extends JPanel {
 
         private BufferedImage image;

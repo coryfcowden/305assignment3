@@ -4,10 +4,18 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.Map;
 
+/**
+ * Swing visualization panel that renders classes on an
+ * Abstractness–Instability chart. Each class appears as a plotted
+ * point, with labels derived from simplified class names.
+ *
+ * @author Cory Cowden
+ * @author Xiomara Alcala
+ */
+
 public class MetricsPanel extends JPanel {
 
     Color lightPink = new Color(255, 213, 229);
-
 
     @Override
     protected void paintComponent(Graphics g) {

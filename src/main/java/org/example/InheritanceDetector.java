@@ -4,15 +4,14 @@ import java.util.*;
 import java.util.regex.*;
 
 /**
- * Looks for inheritance and interface implementation
- * in each class source file.
+ * Detects inheritance and interface implementation relationships
+ * by scanning cleaned class sources for 'extends' and 'implements'
+ * declarations. Adds EXTENDS and REALIZES relations to the output map.
  *
- * This detector only checks for:
- *   - class A extends B
- *   - class A implements X, Y, Z
- *
- * Nothing else is changed from the original logic.
+ * @author Cory Cowden
+ * @author Xiomara Alcala
  */
+
 public class InheritanceDetector {
 
     private static final Pattern EXTENDS =

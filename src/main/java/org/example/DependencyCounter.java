@@ -3,9 +3,15 @@ package org.example;
 import java.util.*;
 import java.util.regex.*;
 
+/**
+ * Performs name-based dependency analysis by counting the number of classes
+ * that reference each other. Provides incoming and outgoing dependency counts.
+ *
+ * @author Cory Cowden
+ * @author Xiomara Alcala
+ */
+
 public class DependencyCounter {
-
-
     public Map<String, Integer> computeIncoming(Map<String, String> classes) {
         Map<String, Integer> incoming = new HashMap<>();
 

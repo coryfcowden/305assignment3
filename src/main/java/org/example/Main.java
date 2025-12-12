@@ -6,6 +6,15 @@ import org.slf4j.LoggerFactory;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Main application window for Assignment 3.
+ * Initializes the Swing UI, sets up all panels, and wires in the Nanny
+ * controller that processes repositories. This class launches the full GUI.
+ *
+ * @author Xiomara Alcala
+ * @author Cory Cowden
+ */
+
 public class Main extends JFrame {
 
 private static final Logger logger = LoggerFactory.getLogger(Main.class);

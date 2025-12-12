@@ -3,6 +3,15 @@ package org.example;
 import java.util.*;
 import java.util.regex.*;
 
+/**
+ * Detects structural dependencies between classes by scanning cleaned Java
+ * source for object creation, local variables, and method parameter types.
+ * Stores discovered relations in the provided output map.
+ *
+ * @author Cory Cowden
+ * @author Xiomara Alcala
+ */
+
 public class DependencyDetector {
 
     private static final Pattern NEW_EXPR =

@@ -2,6 +2,15 @@ package org.example;
 
 import java.util.*;
 
+/**
+ * High-level orchestrator that generates a complete PlantUML diagram.
+ * Cleans sources, detects types, extracts relationships, and delegates
+ * final rendering to PlantUMLBuilder.
+ *
+ * @author Cory Cowden
+ * @author Xiomara Alcala
+ */
+
 public class UMLGenerator {
 
     private static final TypeDetector typeDetector = new TypeDetector();

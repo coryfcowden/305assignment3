@@ -7,6 +7,14 @@ import java.util.List;
 
 public class Nanny {
 
+    /**
+     * Helper service for interacting with GitHub through GitHubHandler.
+     * Provides recursive folder listing and Java file content retrieval.
+     *
+     * @author Cory Cowden
+     * @author Xiomara Alcala
+     */
+
     private final GitHubHandler gh;
 
     public static class FileEntry {

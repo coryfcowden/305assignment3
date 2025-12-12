@@ -3,6 +3,15 @@ package org.example;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+/**
+ * Stores raw class source content for later metric computation.
+ * Normalizes class names into simple names and maintains an ordered
+ * registry of class → source content mappings.
+ *
+ * @author Cory Cowden
+ * @author Xiomara Alcala
+ */
+
 public class MetricRegistry {
 
     private final Map<String, String> classContents = new LinkedHashMap<>();
